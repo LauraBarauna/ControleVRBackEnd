@@ -6,9 +6,11 @@ import com.laurabarauna.controleVR.modules.users.domain.dto.CompleteUserOutputDt
 import com.laurabarauna.controleVR.modules.users.domain.dto.CreateUserInputDto;
 import com.laurabarauna.controleVR.modules.users.domain.entity.User;
 import com.laurabarauna.controleVR.modules.users.domain.repository.UserRepository;
+import com.laurabarauna.controleVR.shared.exception.custom.UsernameUniqueException;
 import com.laurabarauna.controleVR.shared.usecase.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
 
 import static com.laurabarauna.controleVR.modules.users.domain.valueObject.Password.fromRaw;
 
@@ -26,6 +28,11 @@ public class UcCreateUser extends UseCase<CreateUserInputDto, CompleteUserOutput
         user.setPassword(fromRaw(input.password(), this.passwordHasher).getHashedPassword());
 
         user.setRole("ROLE_USER");
+
+        if (this.userRepository.existsByUsername(input.username())) {
+            throw new UsernameUniqueException("The username: " + user.getUsername() + " already exists in the system.");
+        }
+
         this.userRepository.save(user);
 
         return this.userMapper.toCompleteUserOutputDto(user);

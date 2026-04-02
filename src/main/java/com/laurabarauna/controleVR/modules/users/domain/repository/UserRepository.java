@@ -4,4 +4,6 @@ import com.laurabarauna.controleVR.modules.users.domain.entity.User;
 
 public interface UserRepository {
     User save(User user);
+
+    boolean existsByUsername(String username);
 }

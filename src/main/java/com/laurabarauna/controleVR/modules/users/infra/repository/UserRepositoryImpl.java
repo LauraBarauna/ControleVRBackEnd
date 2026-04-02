@@ -15,4 +15,9 @@ class UserRepositoryImpl implements UserRepository {
     public User save(User user) {
         return this.jpaUserRepository.save(user);
     }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return this.jpaUserRepository.existsByUsername(username);
+    }
 }
