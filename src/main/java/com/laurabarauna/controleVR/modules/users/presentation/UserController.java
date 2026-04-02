@@ -30,7 +30,7 @@ public class UserController {
                 .buildAndExpand(created.id())
                 .toUri();
 
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(created);
     }
 
 }

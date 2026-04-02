@@ -25,6 +25,7 @@ public class UcCreateUser extends UseCase<CreateUserInputDto, CompleteUserOutput
         User user = this.userMapper.toDomain(input);
         user.setPassword(fromRaw(input.password(), this.passwordHasher).getHashedPassword());
 
+        user.setRole("ROLE_USER");
         this.userRepository.save(user);
 
         return this.userMapper.toCompleteUserOutputDto(user);
