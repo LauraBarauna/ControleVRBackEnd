@@ -8,10 +8,12 @@ import com.laurabarauna.controleVR.modules.users.domain.entity.User;
 import com.laurabarauna.controleVR.modules.users.domain.repository.UserRepository;
 import com.laurabarauna.controleVR.shared.usecase.UseCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import static com.laurabarauna.controleVR.modules.users.domain.valueObject.Password.fromRaw;
 
 @RequiredArgsConstructor
+@Component
 public class UcCreateUser extends UseCase<CreateUserInputDto, CompleteUserOutputDto> {
 
     private final UserRepository userRepository;
