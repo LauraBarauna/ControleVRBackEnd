@@ -1,6 +1,7 @@
 package com.laurabarauna.controleVR.shared.exception;
 
 import com.laurabarauna.controleVR.shared.exception.custom.UsernameUniqueException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -32,6 +33,17 @@ public class GlobalExceptionHandler {
         errors.put("username", ex.getMessage());
 
         ErrorResponse response = new ErrorResponse("Username already exists", errors);
+
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleEntityNotFoundException(EntityNotFoundException ex) {
+        Map<String, String> errors = new HashMap<>();
+
+        errors.put("entity", ex.getMessage());
+
+        ErrorResponse response = new ErrorResponse("Entity not found", errors);
 
         return ResponseEntity.badRequest().body(response);
     }
