@@ -5,6 +5,8 @@ import com.laurabarauna.controleVR.modules.users.domain.repository.UserRepositor
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Component
 class UserRepositoryImpl implements UserRepository {
@@ -24,5 +26,10 @@ class UserRepositoryImpl implements UserRepository {
     @Override
     public User findById(Long id) {
         return this.jpaUserRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return this.jpaUserRepository.findAll();
     }
 }
