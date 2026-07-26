@@ -10,5 +10,5 @@ import java.util.List;
 public interface UserMapper {
     User toDomain(CreateUserInputDto createUserInputDto);
     CompleteUserOutputDto toCompleteUserOutputDto(User user);
-    List<ShortUserOutputDto> toShortUserOutputDto(List<User> users);
+    ShortUserOutputDto toShortUserOutputDto(User user);
 }

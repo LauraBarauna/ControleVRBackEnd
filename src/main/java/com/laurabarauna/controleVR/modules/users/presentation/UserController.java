@@ -9,12 +9,13 @@ import com.laurabarauna.controleVR.modules.users.domain.dto.ShortUserOutputDto;
 import com.laurabarauna.controleVR.shared.dto.WithId;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -44,8 +45,8 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ShortUserOutputDto>> listUsers() {
-        return ResponseEntity.ok().body(this.ucListUsers.execute(null));
+    public ResponseEntity<Page<ShortUserOutputDto>> listUsers(Pageable pageable) {
+        return ResponseEntity.ok().body(this.ucListUsers.execute(pageable));
     }
 
 }

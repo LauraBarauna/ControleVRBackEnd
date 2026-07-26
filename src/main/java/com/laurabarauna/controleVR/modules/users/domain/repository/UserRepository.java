@@ -1,8 +1,8 @@
 package com.laurabarauna.controleVR.modules.users.domain.repository;
 
 import com.laurabarauna.controleVR.modules.users.domain.entity.User;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface UserRepository {
     User save(User user);
@@ -11,5 +11,5 @@ public interface UserRepository {
 
     User findById(Long id);
 
-    List<User> findAll();
+    Page<User> findAll(Pageable pageable);
 }

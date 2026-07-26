@@ -20,10 +20,8 @@ public interface MapStructUserMapper extends UserMapper {
     CompleteUserOutputDto toCompleteUserOutputDto(User user);
 
     @Override
-    List<ShortUserOutputDto> toShortUserOutputDto(List<User> user);
-
     @Mapping(target = "name", source = ".", qualifiedByName = "fullName")
-    ShortUserOutputDto toShortOutput(User user);
+    ShortUserOutputDto toShortUserOutputDto(User user);
 
     @Named("fullName")
     default String fullName(User user) {
