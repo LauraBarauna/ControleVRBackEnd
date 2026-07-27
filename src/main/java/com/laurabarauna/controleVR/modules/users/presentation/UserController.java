@@ -3,9 +3,11 @@ package com.laurabarauna.controleVR.modules.users.presentation;
 import com.laurabarauna.controleVR.modules.users.application.usecase.UcCreateUser;
 import com.laurabarauna.controleVR.modules.users.application.usecase.UcListUsers;
 import com.laurabarauna.controleVR.modules.users.application.usecase.UcReadUser;
+import com.laurabarauna.controleVR.modules.users.application.usecase.UcUpdateUser;
 import com.laurabarauna.controleVR.modules.users.domain.dto.CompleteUserOutputDto;
 import com.laurabarauna.controleVR.modules.users.domain.dto.CreateUserInputDto;
 import com.laurabarauna.controleVR.modules.users.domain.dto.ShortUserOutputDto;
+import com.laurabarauna.controleVR.modules.users.domain.dto.UpdateUserInputDto;
 import com.laurabarauna.controleVR.shared.dto.WithId;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ public class UserController {
     private final UcCreateUser ucCreateUser;
     private final UcReadUser ucReadUser;
     private final UcListUsers ucListUsers;
+    private final UcUpdateUser ucUpdateUser;
 
     @PostMapping()
     public ResponseEntity<CompleteUserOutputDto> createUser(@Valid @RequestBody CreateUserInputDto input) {
@@ -47,6 +50,13 @@ public class UserController {
     @GetMapping
     public ResponseEntity<Page<ShortUserOutputDto>> listUsers(Pageable pageable) {
         return ResponseEntity.ok().body(this.ucListUsers.execute(pageable));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateUser(
+            @Valid @RequestBody UpdateUserInputDto input,
+            @PathVariable Long id) {
+        return ResponseEntity.ok().body(this.ucUpdateUser.execute(new WithId<>(id, input)));
     }
 
 }

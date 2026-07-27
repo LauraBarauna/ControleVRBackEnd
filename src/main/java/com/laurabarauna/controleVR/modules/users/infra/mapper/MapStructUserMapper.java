@@ -4,10 +4,9 @@ import com.laurabarauna.controleVR.modules.users.application.mapper.UserMapper;
 import com.laurabarauna.controleVR.modules.users.domain.dto.CompleteUserOutputDto;
 import com.laurabarauna.controleVR.modules.users.domain.dto.CreateUserInputDto;
 import com.laurabarauna.controleVR.modules.users.domain.dto.ShortUserOutputDto;
+import com.laurabarauna.controleVR.modules.users.domain.dto.UpdateUserInputDto;
 import com.laurabarauna.controleVR.modules.users.domain.entity.User;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -22,6 +21,10 @@ public interface MapStructUserMapper extends UserMapper {
     @Override
     @Mapping(target = "name", source = ".", qualifiedByName = "fullName")
     ShortUserOutputDto toShortUserOutputDto(User user);
+
+    @Override
+    @BeanMapping(nullValuePropertyMappingStrategy  = NullValuePropertyMappingStrategy.IGNORE)
+    void updateEntity(@MappingTarget User userToUpdate, UpdateUserInputDto source);
 
     @Named("fullName")
     default String fullName(User user) {
