@@ -1,3 +1,7 @@
 databaseChangeLog:
   - include:
       file: db/changelog/migration/20260401-214907_add_table_user.xml
+
+  - include:
+      file: db/changelog/migration/20260727-195145_add_table_card.xml
+
