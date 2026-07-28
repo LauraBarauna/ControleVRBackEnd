@@ -1,3 +1,7 @@
+jwt:
+  secret: lauraLinda1234
+  expiration: 3600000
+
 spring:
   application:
     name: controleVR

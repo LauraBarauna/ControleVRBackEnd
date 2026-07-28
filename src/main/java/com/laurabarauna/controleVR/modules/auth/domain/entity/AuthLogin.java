@@ -1,12 +1,12 @@
 package com.laurabarauna.controleVR.modules.auth.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
-@Component
 @Getter
 @Setter
+@AllArgsConstructor
 public class AuthLogin {
     private Long id;
     private String password;

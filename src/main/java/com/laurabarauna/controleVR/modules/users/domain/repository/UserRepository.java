@@ -12,4 +12,6 @@ public interface UserRepository {
     User findById(Long id);
 
     Page<User> findAll(Pageable pageable);
+
+    User findByUsername(String username);
 }

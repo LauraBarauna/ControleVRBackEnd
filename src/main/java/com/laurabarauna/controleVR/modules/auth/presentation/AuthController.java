@@ -1,7 +1,7 @@
 package com.laurabarauna.controleVR.modules.auth.presentation;
 
 import com.laurabarauna.controleVR.modules.auth.application.usecase.UcLoginUser;
-import com.laurabarauna.controleVR.modules.auth.domain.dto.CompleteLoginUserOutputDto;
+import com.laurabarauna.controleVR.modules.auth.domain.dto.LoginUserOutputDto;
 import com.laurabarauna.controleVR.modules.auth.domain.dto.LoginUserInputDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class AuthController {
     private final UcLoginUser ucLoginUser;
 
     @PostMapping("/login")
-    public ResponseEntity<CompleteLoginUserOutputDto> login(@Valid @RequestBody LoginUserInputDto input){
+    public ResponseEntity<LoginUserOutputDto> login(@Valid @RequestBody LoginUserInputDto input){
         return ResponseEntity.ok().body(this.ucLoginUser.execute(input));
     }
 

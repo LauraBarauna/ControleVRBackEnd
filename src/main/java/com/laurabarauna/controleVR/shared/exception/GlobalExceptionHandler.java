@@ -1,5 +1,6 @@
 package com.laurabarauna.controleVR.shared.exception;
 
+import com.laurabarauna.controleVR.shared.exception.custom.IncorrectPasswordOrUsernameException;
 import com.laurabarauna.controleVR.shared.exception.custom.UsernameUniqueException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +46,16 @@ public class GlobalExceptionHandler {
 
         ErrorResponse response = new ErrorResponse("Entity not found", errors);
 
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(IncorrectPasswordOrUsernameException.class)
+    public ResponseEntity<ErrorResponse> handleIncorrectPasswordOrUsernameException(IncorrectPasswordOrUsernameException ex) {
+        Map<String, String> errors = new HashMap<>();
+
+        errors.put("auth", ex.getMessage());
+
+        ErrorResponse response = new ErrorResponse("Bad Login", errors);
         return ResponseEntity.badRequest().body(response);
     }
 

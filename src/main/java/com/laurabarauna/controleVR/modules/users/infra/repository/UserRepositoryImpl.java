@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Component
 class UserRepositoryImpl implements UserRepository {
@@ -33,6 +35,11 @@ class UserRepositoryImpl implements UserRepository {
     @Override
     public Page<User> findAll(Pageable pageable) {
         return this.jpaUserRepository.findAll(pageable);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return this.jpaUserRepository.findByUsername(username).orElse(null);
     }
 
 
