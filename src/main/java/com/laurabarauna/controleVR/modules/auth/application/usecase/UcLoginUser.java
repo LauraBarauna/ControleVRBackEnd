@@ -26,11 +26,11 @@ public class UcLoginUser extends UseCase<LoginUserInputDto, LoginUserOutputDto> 
     public LoginUserOutputDto execute(LoginUserInputDto input) {
         AuthLogin authLogin = this.authRepository.findByUsername(input.username());
 
-        if (authLogin == null) throw new IncorrectPasswordOrUsernameException("Os dados da senha ou do usuário estão inválidos.");
+        if (authLogin == null) throw new IncorrectPasswordOrUsernameException("Usuário ou senha inválidos.");
 
         Password password = fromHashed(authLogin.getPassword());
 
-        if (!password.matches(input.password(), this.passwordHasher)) throw new IncorrectPasswordOrUsernameException("Os dados da senha ou do usuário estão inválidos.");
+        if (!password.matches(input.password(), this.passwordHasher)) throw new IncorrectPasswordOrUsernameException("Usuário ou senha inválidos.");
 
         String token = tokenProvider.generate(authLogin);
 
